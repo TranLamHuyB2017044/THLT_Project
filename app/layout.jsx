@@ -2,7 +2,9 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import { cn } from '@/lib/utils';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Footer from '@/components/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
@@ -18,10 +20,14 @@ export default function RootLayout({ children }) {
                     inter.className,
                     'bg-background flex flex-col gap-4',
                 )}>
+                <ToastContainer />
                 <div className="grid place-items-center">
                     <Header />
                 </div>
                 <main>{children}</main>
+                <div className="grid place-items-center w-full">
+                    <Footer />
+                </div>
             </body>
         </html>
     );

@@ -15,10 +15,20 @@ const FormAddRegex = () => {
             name: 'regex',
         });
     return (
-        <form className="flex flex-col gap-3">
+        <form className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
+                <label htmlFor="start" className="font-medium">
+                    Thêm kí tự bắt đầu
+                </label>
+                <input
+                    id="start"
+                    {...register(`start`)}
+                    className="ring-1 rounded-md px-2 py-1 max-w-xs"
+                />
+            </div>
             <div className="flex justify-between">
                 <h1 className="font-medium">Thêm quy luật sinh</h1>
-                <section className="flex gap-1 ring-1 ring-sky-50 rounded-lg">
+                <section className="flex gap-2 ring-1 ring-sky-50 rounded-lg">
                     <button
                         type="button"
                         className="rounded-full bg-sky-50 p-1 hover:bg-sky-100"
@@ -42,15 +52,17 @@ const FormAddRegex = () => {
             </div>
             <ul className="flex flex-col gap-2">
                 {fields.map((item, index) => (
-                    <li key={index} className="flex gap-3 items-center">
+                    <li key={index} className="flex gap-2 items-center">
                         <input
                             {...register(`regex.${index}.left`)}
-                            className="ring-1 rounded-md px-2 py-1 "
+                            className="ring-1 rounded-md px-2 py-1 max-w-[200px]"
                         />
-                        <MoveRight />
+                        <div className="w-8">
+                            <MoveRight />
+                        </div>
                         <input
                             {...register(`regex.${index}.right`)}
-                            className="ring-1 rounded-md px-2 py-1 "
+                            className="ring-1 rounded-md px-2 py-1 max-w-[200px]"
                         />
                         <button
                             type="button"
