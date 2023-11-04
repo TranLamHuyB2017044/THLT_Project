@@ -1,7 +1,7 @@
 export const clear = (inputArray) => {
     const result = inputArray.reduce((acc, item) => {
         const { left, right } = item;
-
+        if (left === '' || right === '') return acc;
         // Check if the key (left) already exists in the accumulator object
         if (acc[left] !== undefined) {
             // If it exists, push the right value to the existing array

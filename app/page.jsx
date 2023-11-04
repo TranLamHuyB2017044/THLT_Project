@@ -7,6 +7,10 @@ import { useSearchParams } from 'next/navigation';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Badge } from '@/components/ui/badge';
+import { Smile } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Frown } from 'lucide-react';
+import { PackageSearch } from 'lucide-react';
 export const valueChildren = { left: '', right: '' };
 export const defaultValues = {
     start: '',
@@ -14,13 +18,17 @@ export const defaultValues = {
     string: '',
 };
 const Home = () => {
+    const router = useRouter();
     const methods = useForm({
         defaultValues,
     });
     const searchParams = useSearchParams();
     const string = methods.getValues('string');
     const resultCheck = searchParams.get('result_check');
-    console.log('🚀 ~ file: page.jsx:22 ~ Home ~ resultCheck:', resultCheck);
+    const handleClear = () => {
+        methods.reset();
+        router.replace('/');
+    };
     return (
         <FormProvider {...methods}>
             <div className="grid grid-cols-12 mx-20 gap-5">
@@ -31,7 +39,7 @@ const Home = () => {
                         <div
                             role="button"
                             className="px-3 py-2 rounded-lg bg-slate-300 text-center w-20 float-right"
-                            onClick={() => methods.reset()}>
+                            onClick={() => handleClear()}>
                             Clear
                         </div>
                     </div>
@@ -40,19 +48,40 @@ const Home = () => {
                     <ButtonConvert />
                 </div>
 
-                <div className="col-span-5  rounded-lg">
-                    <h1 className="font-medium">Kết quả:</h1>
-                    {string && (
-                        <div className="text-gray-500">
+                <div className="col-span-5  rounded-lg ring-1 overflow-hidden h-full">
+                    <h1 className="font-medium text-xl text-center bg-pink-100 py-1 rounded-md">
+                        Kết quả
+                    </h1>
+                    {string ? (
+                        <div className="h-full flex justify-center items-center ">
                             {resultCheck === 'true' ? (
-                                <Badge className="bg-green-100 text-green-400">
-                                    Chuỗi thuộc văn phạm chính quy
-                                </Badge>
+                                <div className="flex flex-col justify-center items-center">
+                                    <div className="flex justify-center items-center">
+                                        <Smile className="w-40 h-40 stroke-green-300" />
+                                    </div>
+                                    <Badge className="bg-green-100 text-green-400 text-2xl">
+                                        Chuỗi được sinh ra từ văn phạm
+                                    </Badge>
+                                </div>
                             ) : (
-                                <Badge className="bg-red-100 text-red-400">
-                                    Chuỗi không thuộc văn phạm chính quy
-                                </Badge>
+                                <div className="h-full flex flex-col justify-center items-center">
+                                    <div className="flex justify-center items-center">
+                                        <Frown className="w-40 h-40 stroke-red-300" />
+                                    </div>
+                                    <Badge className="bg-red-100 text-red-400 text-2xl">
+                                        Chuỗi không được sinh ra từ văn phạm
+                                    </Badge>
+                                </div>
                             )}
+                        </div>
+                    ) : (
+                        <div className="h-full flex flex-col justify-center items-center">
+                            <div className="flex justify-center items-center">
+                                <PackageSearch className="w-40 h-40 stroke-sky-300" />
+                            </div>
+                            <Badge className="bg-sky-100 text-sky-400 text-2xl">
+                                Chưa có dữ liệu. Hãy nhập vào form.
+                            </Badge>
                         </div>
                     )}
                 </div>
