@@ -17,7 +17,7 @@ const Result = ({}) => {
     const grammarShapeTemp = [
         { name: 'V', value: grammarShape.V.join(', ') },
         { name: 'T', value: grammarShape.T.join(', ') },
-        { name: 'P', value: grammarShape.P.join(' | ') },
+        { name: 'P', value: grammarShape.P.join(', ') },
         { name: 'S', value: grammarShape.S },
     ];
     return (
@@ -37,7 +37,13 @@ const Result = ({}) => {
                     </div>
                     <div className="mx-5">
                         <p className="font-medium">Dẫn xuất trực tiếp: </p>
-                        <p>{paths.join(' -> ')}</p>
+                        <div className="flex flex-col ">
+                            {paths.map((path, index) => (
+                                <span key={index}>
+                                    {index + 1}. <span>{path}</span>
+                                </span>
+                            ))}
+                        </div>
                     </div>
                     <div className="h-full flex justify-center items-center ">
                         {resultCheck ? (

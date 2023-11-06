@@ -31,7 +31,7 @@ const Home = () => {
     return (
         <FormProvider {...methods}>
             <div className="grid grid-cols-12 mx-20 gap-5">
-                <div className="col-span-5  rounded-lg min-h-[200px] flex flex-col gap-5 p-4 border-4 border-dashed">
+                <div className="col-span-5  rounded-lg h-fit flex flex-col gap-5 p-4 border-4 border-dashed">
                     <FormAddRegex />
                     <FormAddString />
                     <div>
@@ -43,7 +43,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-span-2 place-self-center  ">
+                <div className="col-span-2 place-self-center  sticky top-5">
                     <ButtonConvert />
                 </div>
 

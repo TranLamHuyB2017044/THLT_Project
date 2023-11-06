@@ -15,8 +15,23 @@ export const clear = (inputArray) => {
     }, {});
     return result;
 };
-export const checkGrammar = (grammar, symbol, string, path = []) => {
-    if (!string && symbol === '') {
+export const checkGrammar = (
+    grammar,
+    symbol,
+    string,
+    path = [],
+    depth = 1,
+    curRule = '',
+) => {
+    console.log(
+        '🚀 ~ file: regex.js:19 ~ checkGrammar ~ grammar, symbol, string:',
+        {
+            symbol,
+            string,
+        },
+    );
+    if (depth > 100) return false;
+    if (!string && !symbol) {
         return true;
     }
 
@@ -25,17 +40,37 @@ export const checkGrammar = (grammar, symbol, string, path = []) => {
     }
 
     if (symbol[0] === string[0]) {
-        return checkGrammar(grammar, symbol.slice(1), string.slice(1), path);
+        return checkGrammar(
+            grammar,
+            symbol.slice(1),
+            string.slice(1),
+            path,
+            depth + 1,
+            curRule,
+        );
     }
 
     if (!grammar[symbol[0]]) {
         return false;
     }
     for (const rule of grammar[symbol[0]]) {
-        path.push(symbol[0] + ' -> ' + rule);
-        if (checkGrammar(grammar, rule + symbol.slice(1), string, path)) {
+        if (!curRule) curRule = rule;
+        let beforeChange = curRule;
+        curRule = curRule.replace(symbol[0], rule);
+        path.push(beforeChange + ' -> ' + curRule);
+        if (
+            checkGrammar(
+                grammar,
+                rule + symbol.slice(1),
+                string,
+                path,
+                depth + 1,
+                curRule,
+            )
+        ) {
             return true;
         }
+        path.pop();
     }
 
     return false;
