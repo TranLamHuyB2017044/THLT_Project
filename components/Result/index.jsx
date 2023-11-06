@@ -35,16 +35,19 @@ const Result = ({}) => {
                             </p>
                         ))}
                     </div>
-                    <div className="mx-5">
-                        <p className="font-medium">Dẫn xuất trực tiếp: </p>
-                        <div className="flex flex-col ">
-                            {paths.map((path, index) => (
-                                <span key={index}>
-                                    {index + 1}. <span>{path}</span>
-                                </span>
-                            ))}
+                    {paths.length !== 0 && (
+                        <div className="mx-5">
+                            <p className="font-medium">Dẫn xuất trực tiếp: </p>
+                            <div className="flex flex-col ">
+                                {paths.map((path, index) => (
+                                    <span key={index}>
+                                        {index + 1}. <span>{path}</span>
+                                    </span>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
+
                     <div className="h-full flex justify-center items-center ">
                         {resultCheck ? (
                             <div className="flex flex-col justify-center items-center">
