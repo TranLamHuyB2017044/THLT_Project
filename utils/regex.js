@@ -32,7 +32,7 @@ export const checkGrammar = (grammar, symbol, string, path = []) => {
         return false;
     }
     for (const rule of grammar[symbol[0]]) {
-        path.push(symbol + ' -> ' + rule);
+        path.push(symbol[0] + ' -> ' + rule);
         if (checkGrammar(grammar, rule + symbol.slice(1), string, path)) {
             return true;
         }
