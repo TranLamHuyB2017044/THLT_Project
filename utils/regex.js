@@ -25,12 +25,9 @@ export const clear = (inputArray) => {
 // ) => {
 //     console.log(
 //         '🚀 ~ file: regex.js:19 ~ checkGrammar ~ grammar, symbol, string:',
-//         {
-//             symbol,
-//             string,
-//         },
+//         { grammar, symbol, string },
 //     );
-//     if (depth > 100) return false;
+//     if (depth > 1000) return false;
 //     if (!string && !symbol) {
 //         return true;
 //     }
@@ -105,8 +102,9 @@ export const checkGrammar = (
     depth = 1,
     curRule = symbol[0],
 ) => {
+    console.log({ symbol, string });
     // Check if depth exceeds 100, and if so, return false to prevent infinite recursion
-    if (depth > 100) return false;
+    if (depth > 1000) return false;
 
     // Check if both symbol and string are empty, which means a successful match
     if (!symbol && !string) {

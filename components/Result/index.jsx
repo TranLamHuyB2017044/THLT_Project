@@ -5,8 +5,6 @@ import { Badge } from '../ui/badge';
 import { Frown } from 'lucide-react';
 import { PackageSearch } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
-import { clear, filterLowercase } from '@/utils/regex';
-import { useSearchParams } from 'next/navigation';
 import { useGrammar } from '../store';
 
 const Result = ({}) => {
@@ -23,7 +21,7 @@ const Result = ({}) => {
     return (
         <>
             {string ? (
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-3 m-3">
                     <div className="mx-5">
                         <p className="font-medium">Thành phần văn phạm:</p>
                         {grammarShapeTemp.map((grm, index) => (
@@ -36,17 +34,23 @@ const Result = ({}) => {
                         ))}
                     </div>
                     {paths.length !== 0 && (
-                        <div className="mx-5">
-                            <p className="font-medium">Dẫn xuất trực tiếp: </p>
-                            <div className="flex flex-col ">
-                                {paths.map((path, index) => (
-                                    <span key={index}>
-                                        {index + 1}. <span>{path}</span>
-                                    </span>
-                                ))}
+                        <>
+                            <hr />
+                            <div className="mx-5 overflow-auto h-[300px]">
+                                <p className="font-medium">
+                                    Dẫn xuất trực tiếp:{' '}
+                                </p>
+                                <div className="flex flex-col ">
+                                    {paths.map((path, index) => (
+                                        <span key={index}>
+                                            {index + 1}. <span>{path}</span>
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
+                        </>
                     )}
+                    <hr />
 
                     <div className="h-full flex justify-center items-center ">
                         {resultCheck ? (
