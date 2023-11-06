@@ -11,6 +11,7 @@ import { Smile } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Frown } from 'lucide-react';
 import { PackageSearch } from 'lucide-react';
+import Result from '@/components/Result';
 export const valueChildren = { left: '', right: '' };
 export const defaultValues = {
     start: '',
@@ -23,8 +24,6 @@ const Home = () => {
         defaultValues,
     });
     const searchParams = useSearchParams();
-    const string = methods.getValues('string');
-    const resultCheck = searchParams.get('result_check');
     const handleClear = () => {
         methods.reset();
         router.replace('/');
@@ -52,38 +51,7 @@ const Home = () => {
                     <h1 className="font-medium text-xl text-center bg-pink-100 py-1 rounded-md">
                         Kết quả
                     </h1>
-                    {string ? (
-                        <div className="h-full flex justify-center items-center ">
-                            {resultCheck === 'true' ? (
-                                <div className="flex flex-col justify-center items-center">
-                                    <div className="flex justify-center items-center">
-                                        <Smile className="w-40 h-40 stroke-green-300" />
-                                    </div>
-                                    <Badge className="bg-green-100 text-green-400 text-2xl">
-                                        Chuỗi được sinh ra từ văn phạm
-                                    </Badge>
-                                </div>
-                            ) : (
-                                <div className="h-full flex flex-col justify-center items-center">
-                                    <div className="flex justify-center items-center">
-                                        <Frown className="w-40 h-40 stroke-red-300" />
-                                    </div>
-                                    <Badge className="bg-red-100 text-red-400 text-2xl">
-                                        Chuỗi không được sinh ra từ văn phạm
-                                    </Badge>
-                                </div>
-                            )}
-                        </div>
-                    ) : (
-                        <div className="h-full flex flex-col justify-center items-center">
-                            <div className="flex justify-center items-center">
-                                <PackageSearch className="w-40 h-40 stroke-sky-300" />
-                            </div>
-                            <Badge className="bg-sky-100 text-sky-400 text-2xl">
-                                Chưa có dữ liệu. Hãy nhập vào form.
-                            </Badge>
-                        </div>
-                    )}
+                    <Result />
                 </div>
             </div>
         </FormProvider>
