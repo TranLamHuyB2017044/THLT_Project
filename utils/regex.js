@@ -3,7 +3,7 @@ export const clear = (inputArray) => {
         const { left, right } = item;
         if (left === '' || right === '') return acc;
         // Check if the key (left) already exists in the accumulator object
-        if (acc[left] !== undefined) {
+        if (acc[left] !== undefined && !acc[left].includes(right)) {
             // If it exists, push the right value to the existing array
             acc[left].push(right);
         } else {
@@ -15,7 +15,7 @@ export const clear = (inputArray) => {
     }, {});
     return result;
 };
-export const checkGrammar = (grammar, symbol, string) => {
+export const checkGrammar = (grammar, symbol, string, path = []) => {
     if (!string && symbol === '') {
         return true;
     }
@@ -25,37 +25,20 @@ export const checkGrammar = (grammar, symbol, string) => {
     }
 
     if (symbol[0] === string[0]) {
-        return checkGrammar(grammar, symbol.slice(1), string.slice(1));
+        return checkGrammar(grammar, symbol.slice(1), string.slice(1), path);
     }
 
     if (!grammar[symbol[0]]) {
         return false;
     }
-
     for (const rule of grammar[symbol[0]]) {
-        if (checkGrammar(grammar, rule + symbol.slice(1), string)) {
+        path.push(symbol + ' -> ' + rule);
+        if (checkGrammar(grammar, rule + symbol.slice(1), string, path)) {
             return true;
         }
     }
 
     return false;
-};
-export const generateStrings = (grammar, startSymbol, limit = 10) => {
-    if (limit === 0) {
-        return [];
-    }
-    if (grammar[startSymbol]) {
-        const expansions = grammar[startSymbol];
-        const strings = [];
-        for (const expansion of expansions) {
-            const expansionStrings = expansion
-                .split('')
-                .flatMap((char) => generateStrings(grammar, char, limit - 1));
-            strings.push(...expansionStrings);
-        }
-        return strings;
-    }
-    return startSymbol;
 };
 
 export const filterLowercase = (grammar) => {
@@ -67,7 +50,10 @@ export const filterLowercase = (grammar) => {
         value.forEach((char) => {
             let listChar = char.split('');
             listChar.forEach((c) => {
-                if (('a' <= c && c <= 'z') || ('0' <= c && c <= '9')) {
+                if (
+                    (('a' <= c && c <= 'z') || ('0' <= c && c <= '9')) &&
+                    !result.includes(c)
+                ) {
                     result.push(c);
                 }
             });
@@ -76,11 +62,3 @@ export const filterLowercase = (grammar) => {
 
     return result;
 };
-const strings = generateStrings(
-    {
-        S: ['0A'],
-        A: ['10A', 'e'],
-    },
-    'S',
-);
-console.log('🚀 ~ file: regex.js:96 ~ strings:', strings);

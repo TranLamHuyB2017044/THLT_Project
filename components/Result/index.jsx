@@ -12,18 +12,18 @@ import { useGrammar } from '../store';
 const Result = ({}) => {
     const { getValues } = useFormContext();
     const string = getValues('string');
-    const { resultCheck, grammarShape } = useGrammar();
+    const { resultCheck, grammarShape, paths } = useGrammar();
 
     const grammarShapeTemp = [
         { name: 'V', value: grammarShape.V.join(', ') },
         { name: 'T', value: grammarShape.T.join(', ') },
-        { name: 'P', value: grammarShape.P.join(', ') },
+        { name: 'P', value: grammarShape.P.join(' | ') },
         { name: 'S', value: grammarShape.S },
     ];
     return (
         <>
             {string ? (
-                <>
+                <div className="flex flex-col gap-5">
                     <div className="mx-5">
                         <p className="font-medium">Thành phần văn phạm:</p>
                         {grammarShapeTemp.map((grm, index) => (
@@ -35,7 +35,10 @@ const Result = ({}) => {
                             </p>
                         ))}
                     </div>
-
+                    <div className="mx-5">
+                        <p className="font-medium">Dẫn xuất trực tiếp: </p>
+                        <p>{paths.join(' -> ')}</p>
+                    </div>
                     <div className="h-full flex justify-center items-center ">
                         {resultCheck ? (
                             <div className="flex flex-col justify-center items-center">
@@ -57,7 +60,7 @@ const Result = ({}) => {
                             </div>
                         )}
                     </div>
-                </>
+                </div>
             ) : (
                 <div className="h-full flex flex-col justify-center items-center">
                     <div className="flex justify-center items-center">

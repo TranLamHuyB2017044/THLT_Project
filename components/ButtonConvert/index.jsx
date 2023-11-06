@@ -16,27 +16,21 @@ import { useGrammar } from '../store';
 const ButtonConvert = () => {
     const pathName = usePathname();
     const router = useRouter();
-    const { setResultCheck, setGrammarShape, setStringSets } = useGrammar();
+    const { setResultCheck, setGrammarShape, setStringSets, setPaths } =
+        useGrammar();
     const { getValues } = useFormContext();
-    const handleConvert = () => {
+    const handleConvert = async () => {
         const regex = getValues('regex');
         const string = getValues('string');
         const start = getValues('start');
         const grammar = clear(regex);
-        console.log(
-            '🚀 ~ file: index.jsx:21 ~ handleConvert ~ grammar:',
-            grammar,
-        );
-
+        // kiểm tra đầu vào
         if (!start) return toast.error('Vui lòng nhập chuỗi bắt đầu');
         if (!Object.keys(grammar).length)
             return toast.error('Vui lòng nhập quy luật sinh');
         if (!string) return toast.error('Vui lòng nhập chuỗi kiểm tra');
-        const result = checkGrammar(grammar, start, string);
-        console.log(
-            '🚀 ~ file: index.jsx:27 ~ handleConvert ~ result:',
-            result,
-        );
+        const path = [];
+        const result = await checkGrammar(grammar, start, string, path);
 
         const V = Object.keys(grammar).map((k) => k);
         const P = [];
@@ -50,14 +44,10 @@ const ButtonConvert = () => {
             P,
             S: start,
         };
-        setGrammarShape(grammarShape);
 
+        setGrammarShape(grammarShape);
+        setPaths(path);
         setResultCheck(result);
-        // const stringSets = generateStrings(grammar, start, 0);
-        // console.log(
-        //     '🚀 ~ file: index.jsx:57 ~ handleConvert ~ stringSets:',
-        //     stringSets,
-        // );
     };
     return (
         <div>
