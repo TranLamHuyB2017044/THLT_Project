@@ -36,7 +36,7 @@ const Result = ({}) => {
                     {paths.length !== 0 && (
                         <>
                             <hr />
-                            <div className="mx-5 overflow-auto h-[300px]">
+                            <div className="mx-5 overflow-auto max-h-[300px]">
                                 <p className="font-medium">
                                     Dẫn xuất trực tiếp:{' '}
                                 </p>
@@ -52,22 +52,22 @@ const Result = ({}) => {
                     )}
                     <hr />
 
-                    <div className="h-full flex justify-center items-center ">
+                    <div className=" flex justify-center items-center ">
                         {resultCheck ? (
                             <div className="flex flex-col justify-center items-center">
                                 <div className="flex justify-center items-center">
                                     <Smile className="w-20 h-20 stroke-green-300" />
                                 </div>
-                                <Badge className="bg-green-100 text-green-400 text-2xl">
+                                <Badge className="bg-green-100 text-green-400  text-lg md:text-2xl ">
                                     Chuỗi được sinh ra từ văn phạm
                                 </Badge>
                             </div>
                         ) : (
-                            <div className="h-full flex flex-col justify-center items-center">
+                            <div className=" flex flex-col justify-center items-center">
                                 <div className="flex justify-center items-center">
                                     <Frown className="w-20 h-20 stroke-red-300" />
                                 </div>
-                                <Badge className="bg-red-100 text-red-400 text-2xl">
+                                <Badge className="bg-red-100 text-red-400  text-lg md:text-2xl ">
                                     Chuỗi không được sinh ra từ văn phạm
                                 </Badge>
                             </div>
@@ -75,11 +75,11 @@ const Result = ({}) => {
                     </div>
                 </div>
             ) : (
-                <div className="h-full flex flex-col justify-center items-center">
+                <div className=" h-full flex flex-col justify-center items-center m-3">
                     <div className="flex justify-center items-center">
                         <PackageSearch className="w-20 h-20 stroke-sky-300" />
                     </div>
-                    <Badge className="bg-sky-100 text-sky-400 text-2xl">
+                    <Badge className="bg-sky-100 text-sky-400 text-lg md:text-2xl">
                         Chưa có dữ liệu. Hãy nhập vào form.
                     </Badge>
                 </div>

@@ -28,7 +28,7 @@ const FormAddRegex = () => {
             </div>
             <div className="flex justify-between">
                 <h1 className="font-medium">Thêm quy luật sinh</h1>
-                <section className="flex gap-2 ring-1 ring-sky-50 rounded-lg">
+                <section className="flex gap-2  rounded-lg">
                     <button
                         type="button"
                         className="rounded-full bg-sky-50 p-1 hover:bg-sky-100"
@@ -55,14 +55,14 @@ const FormAddRegex = () => {
                     <li key={index} className="flex gap-2 items-center">
                         <input
                             {...register(`regex.${index}.left`)}
-                            className="ring-1 rounded-md px-2 py-1 max-w-[200px]"
+                            className="ring-1 rounded-md px-2 py-1  w-28 md:w-[200px]"
                         />
                         <div className="w-8">
                             <MoveRight />
                         </div>
                         <input
                             {...register(`regex.${index}.right`)}
-                            className="ring-1 rounded-md px-2 py-1 max-w-[200px]"
+                            className="ring-1 rounded-md px-2 py-1  w-28 md:w-[200px]"
                         />
                         <button
                             type="button"

@@ -30,8 +30,8 @@ const Home = () => {
     };
     return (
         <FormProvider {...methods}>
-            <div className="grid grid-cols-12 mx-20 gap-5">
-                <div className="col-span-5  rounded-lg h-fit flex flex-col gap-5 p-4 border-4 border-dashed">
+            <div className="grid md:grid-cols-12 grid-cols-1 mx-20 gap-5">
+                <div className="md:col-span-5  rounded-lg h-fit flex flex-col gap-5 p-4 border-4 border-dashed">
                     <FormAddRegex />
                     <FormAddString />
                     <div>
@@ -43,11 +43,11 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-span-2 place-self-center  sticky top-5">
+                <div className="md:col-span-2 place-self-center  sticky top-5">
                     <ButtonConvert />
                 </div>
 
-                <div className="col-span-5  rounded-lg ring-1 overflow-hidden h-full">
+                <div className="md:col-span-5  rounded-lg ring-1 ring-gray-200 overflow-hidden">
                     <h1 className="font-medium text-xl text-center bg-pink-100 py-1 rounded-md">
                         Kết quả
                     </h1>

@@ -52,7 +52,7 @@ const ButtonConvert = () => {
     return (
         <div
             role="button"
-            className="flex flex-col bg-green-100 hover:bg-green-200 transition-full duration-150 ease-in-out px-4 py-3 rounded-full  w-fit justify-center items-center"
+            className="flex flex-col bg-green-100 hover:bg-green-200 transition-full duration-150 ease-in-out px-7 py-3 rounded-full  w-fit justify-center items-center"
             onClick={handleConvert}>
             <ScanBarcode />
             <span>Kiểm tra</span>
