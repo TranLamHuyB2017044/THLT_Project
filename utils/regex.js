@@ -155,6 +155,6 @@ export const checkGrammar = (
             path.pop();
         }
     }
-
+    // If true
     return false;
 };
